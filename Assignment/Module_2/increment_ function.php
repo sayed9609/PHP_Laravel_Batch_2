@@ -39,4 +39,4 @@ function evenIncrement ($start, $end, $step = 2) {
     
 }
 
-evenIncrement(1,20,2);
+evenIncrement(2,10,2);
