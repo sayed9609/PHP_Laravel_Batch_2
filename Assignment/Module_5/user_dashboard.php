@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// check role is set(isset) by session  or role value is admin
 if(!isset($_SESSION["role"]) || $_SESSION["role"] !='user'){ 
     header("Location: login.php");
 }

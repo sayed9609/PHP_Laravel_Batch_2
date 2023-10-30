@@ -6,7 +6,6 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// Load the JSON data
 $users = json_decode(file_get_contents('users.json'), true);
 
 if (isset($_POST['edit'])) {
@@ -18,7 +17,7 @@ if (isset($_POST['edit'])) {
 }
 
 if (isset($_POST['delete'])) {
-    // Handle delete request
+
     $deleteEmail = $_POST['delete'];
     if (isset($users[$deleteEmail])) {
         unset($users[$deleteEmail]);
@@ -27,7 +26,7 @@ if (isset($_POST['delete'])) {
 }
 
 if (isset($_POST['add_user'])) {
-    // Handle adding a new user
+
     $newUserEmail = $_POST['email'];
     $newUserFirstName = $_POST['firstname'];
     $newUserLastName = $_POST['lastname'];
@@ -50,12 +49,9 @@ if (isset($_POST['logout'])) {
     exit();
 }
 
-// Set a cookie with the user's name
+
 $adminName = base64_encode($_SESSION['firstname']) . ' ' . base64_encode($_SESSION['lastname']);
 setcookie('admin_name', $adminName, time() + 30, '/');
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -131,7 +127,6 @@ setcookie('admin_name', $adminName, time() + 30, '/');
         </form>
     </div>
 
-    <!-- Add Bootstrap JS and Popper.js scripts for Bootstrap to work -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

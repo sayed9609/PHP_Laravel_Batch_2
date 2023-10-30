@@ -4,7 +4,6 @@ $usersFile = 'users.json';
 
 $users = file_exists($usersFile) ? json_decode(file_get_contents($usersFile), true) : [];
 
-
 $errMess = "";
 
 function saveUser($users, $file)
@@ -33,19 +32,12 @@ if (isset($_POST["submit"])) {
                 "password" => $password,
                 "role" => "user"
             ];
-            saveUser($users, $usersFile); //add users and file
+            saveUser($users, $usersFile);
             header("Location:login.php");
         }
     }
-
 }
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -102,7 +94,8 @@ if (isset($_POST["submit"])) {
                     </div>
                     <p style="padding-left:20%">Already have an account? <a href="login.php"
                             class="btn btn-link">Login</a></p>
-
                 </div>
             </div>
         </div>
+</body>
+</html>

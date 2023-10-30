@@ -9,7 +9,6 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
 if (isset($_GET['email'])) {
     $editEmail = base64_decode($_GET['email']);
 
-    // Load the JSON data
     $users = json_decode(file_get_contents('users.json'), true);
 
     if (isset($users[$editEmail])) {
@@ -24,7 +23,7 @@ if (isset($_GET['email'])) {
 }
 
 if (isset($_POST['update'])) {
-    // Handle edit form submission
+
     $editFirstName = $_POST['firstname'];
     $editLastName = $_POST['lastname'];
     $editRole = $_POST['role'];
@@ -33,7 +32,7 @@ if (isset($_POST['update'])) {
     $users[$editEmail]['lastname'] = $editLastName;
     $users[$editEmail]['role'] = $editRole;
 
-    // Update the JSON data
+
     file_put_contents('users.json', json_encode($users, JSON_PRETTY_PRINT));
 
     header("Location: admin_dashboard.php");
@@ -44,7 +43,7 @@ if (isset($_POST['update'])) {
 <html>
 <head>
     <title>Edit User</title>
-    <!-- Add Bootstrap CSS link -->
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
@@ -67,7 +66,6 @@ if (isset($_POST['update'])) {
         </form>
     </div>
 
-    <!-- Add Bootstrap JS and Popper.js scripts for Bootstrap to work -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
