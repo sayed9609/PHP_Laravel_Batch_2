@@ -1,29 +1,12 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'manager') {
     header("Location: login.php");
     exit();
 }
 
 $users = json_decode(file_get_contents('users.json'), true);
-
-if (isset($_POST['edit'])) {
-
-    $editEmail = $_POST['edit'];
-    $encode = base64_encode($editEmail);
-    header("Location: edit.php?email=$encode");
-    exit();
-}
-
-if (isset($_POST['delete'])) {
-
-    $deleteEmail = $_POST['delete'];
-    if (isset($users[$deleteEmail])) {
-        unset($users[$deleteEmail]);
-        file_put_contents('users.json', json_encode($users, JSON_PRETTY_PRINT));
-    }
-}
 
 if (isset($_POST['add_user'])) {
 
@@ -33,7 +16,7 @@ if (isset($_POST['add_user'])) {
     $newUserPassword = md5($_POST['password']);
     $newUserRole = $_POST['role'];
 
-    if (!empty($newUserEmail) && !empty($newUserFirstName) && !empty($newUserLastName) && !empty($newUserPassword) && !empty($newUserRole)) {
+    if (!empty($newUserEmail) && !empty($newUserFirstName) && !empty($newUserLastName) && !empty($newUserPassword)) {
         $users[$newUserEmail] = [
             'firstname' => $newUserFirstName,
             'lastname' => $newUserLastName,
@@ -50,8 +33,8 @@ if (isset($_POST['logout'])) {
 }
 
 
-$adminName = base64_encode($_SESSION['firstname']) . ' ' . base64_encode($_SESSION['lastname']);
-setcookie('admin_name', $adminName, time() + 30, '/');
+$managerName = base64_encode($_SESSION['firstname']) . ' ' . base64_encode($_SESSION['lastname']);
+setcookie('manager_name', $managerName, time() + 30, '/');
 ?>
 
 <!DOCTYPE html>
@@ -66,16 +49,16 @@ setcookie('admin_name', $adminName, time() + 30, '/');
     <div class="container mt-5">
         <div class="row justify-content-between">
             <div class="col-md-6">
-                <h1>Admin Dashboard</h1>
+            <h1>Manager Dashboard</h1>
             </div>
             <div class="col-md-6 text-right">
                 <form method="post" action="logout.php">
-                    <button type="submit" name="logout" class="btn btn-danger">Logout</button>
+                    <button type="submit" name="logout_manager" class="btn btn-danger">Logout</button>
                 </form>
             </div>
         </div>
-        <h3>Welcome, <?php echo $_SESSION['firstname']; ?> !</h3>    
-
+        
+        <h3>Welcome, <?php echo $_SESSION['firstname']; ?> !</h3>
         <table class="table mt-4">
             <thead>
                 <tr>
@@ -83,7 +66,6 @@ setcookie('admin_name', $adminName, time() + 30, '/');
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -93,12 +75,6 @@ setcookie('admin_name', $adminName, time() + 30, '/');
                         <td><?php echo $user['lastname']; ?></td>
                         <td><?php echo $email; ?></td>
                         <td><?php echo $user['role']; ?></td>
-                        <td>
-                            <form method="POST">
-                                <button type="submit" name="edit" value="<?php echo $email; ?>" class="btn btn-primary">Edit</button>
-                                <button type="submit" name="delete" value="<?php echo $email; ?>" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -121,7 +97,6 @@ setcookie('admin_name', $adminName, time() + 30, '/');
                 </div>
                 <div class="form-group col-md-2">
                     <select name="role" class="form-control">
-                        <option value="admin">Admin</option>
                         <option value="manager">Manager</option>
                         <option value="user">User</option>
                     </select>

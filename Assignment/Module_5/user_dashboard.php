@@ -10,7 +10,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] !='user'){
 <html>
 <head>
   <title>User Dashboard</title>
-  <link rel = 'stylesheet' href = '/Style/user_dashboard.css'>
+  <link rel = 'stylesheet' href = '/Assignment/Module_5/Style/user_dashboard.css'>
 </head>
 <body>
   <div id="dashboard">

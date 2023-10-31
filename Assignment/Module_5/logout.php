@@ -8,6 +8,12 @@ if (isset($_POST['logout'])) {
     header("Location: login.php");
     exit();
 }
+if (isset($_POST['logout_manager'])) {
+
+    setcookie('manager_name', '', time() - 3600, '/');
+    header("Location: login.php");
+    exit();
+}
 
 header("Location: login.php");
 exit();

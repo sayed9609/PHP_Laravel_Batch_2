@@ -10,5 +10,7 @@ elseif ($_SESSION['role']=='user' ) {
 }
 elseif($_SESSION['role']=='admin' ){
     header("Location: admin_dashboard.php");
-
+}
+elseif($_SESSION['role']=='manager' ){
+    header("Location: manager_dashboard.php");
 }

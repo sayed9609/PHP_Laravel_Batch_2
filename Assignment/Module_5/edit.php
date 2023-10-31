@@ -51,16 +51,20 @@ if (isset($_POST['update'])) {
         <h2>Edit User</h2>
         <form method="post">
             <div class="form-group">
-                <label for="role">Role:</label>
-                <input type="text" class="form-control" id="role" name="role" value="<?php echo $user['role']; ?>">
-            </div>
-            <div class="form-group">
                 <label for="firstname">First Name:</label>
                 <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $user['firstname']; ?>">
             </div>
             <div class="form-group">
                 <label for="lastname">Last Name:</label>
                 <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $user['lastname']; ?>">
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select name="role" class="form-control" id="role">
+                    <option value="admin" <?php if ($user['role'] == 'admin') { echo'selected'; }?>>Admin</option>
+                    <option value="manager" <?php if ($user['role'] =='manager') { echo'selected'; }?>>Manager</option>
+                    <option value="user" <?php if ($user['role'] == 'user') { echo'selected'; }?>>User</option>
+                </select>
             </div>
             <button type="submit" name="update" class="btn btn-primary">Update</button>
         </form>

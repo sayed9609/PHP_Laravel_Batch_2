@@ -9,12 +9,18 @@
         "firstname": "Sayed",
         "lastname": "Mahmud",
         "password": "81dc9bdb52d04dc20036dbd8313ed055",
+        "role": "manager"
+    },
+    "arif@email.com": {
+        "firstname": "Arif",
+        "lastname": "Billah",
+        "password": "81dc9bdb52d04dc20036dbd8313ed055",
         "role": "user"
     },
     "masud@email.com": {
         "firstname": "Masud",
         "lastname": "Hossain",
         "password": "81dc9bdb52d04dc20036dbd8313ed055",
-        "role": "user"
+        "role": "manager"
     }
 }
